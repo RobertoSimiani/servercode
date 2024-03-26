@@ -26,7 +26,7 @@ class UserManager {
         photo: "https://picsum.photos/",
         email: data.email,
         password: data.password,
-        role: data.role,
+        role: data.role || 0 ,
       };
 
       let allUser = await fs.promises.readFile(this.path, "utf-8");

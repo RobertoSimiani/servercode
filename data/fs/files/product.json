@@ -1,29 +1,5 @@
 [
   {
-    "id": "00821f1f2fe00208c56d44b8",
-    "title": "Remera Estampada",
-    "photo": "https://picsum.photos/",
-    "category": "ropa masculina",
-    "price": 8500,
-    "stock": 20
-  },
-  {
-    "id": "799b6361c5e7825fbd667142",
-    "title": "Chomba",
-    "photo": "https://picsum.photos/",
-    "category": "ropa masculina",
-    "price": 30500,
-    "stock": 8
-  },
-  {
-    "id": "f68ad46b7b3207aa5aeccafd",
-    "title": "Pantalon Cargo",
-    "photo": "https://picsum.photos/",
-    "category": "ropa masculina",
-    "price": 20600,
-    "stock": 15
-  },
-  {
     "id": "335ec12bef2341daecdd567c",
     "title": "Gorra Trucker",
     "photo": "https://picsum.photos/",

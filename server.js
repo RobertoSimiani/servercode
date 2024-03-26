@@ -13,6 +13,7 @@ server.listen(port, ready);
 
 //MIDDLEWARES
 server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 //---------------------------------------------------------------------------------------------
 
@@ -64,19 +65,19 @@ server.get("/api/products/:pid", async (req, res) => {
         succes: true,
       });
     } else {
-      const error = new Error("Not Found")
-      error.statusCode= 404
-      throw error
+      const error = new Error("Not Found");
+      error.statusCode = 404;
+      throw error;
     }
   } catch (error) {
     console.log(error);
-    return res.status(error.statusCode).json({
-      response: error.message,
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
       succes: false,
     });
   }
 });
-
 
 // READ ALL PRODUCTS
 server.get("/api/products", async (req, res) => {
@@ -91,18 +92,80 @@ server.get("/api/products", async (req, res) => {
         succes: true,
       });
     } else {
-      const error = new Error("Not Found")
-      error.statusCode= 404
-      throw error
+      const error = new Error("Not Found");
+      error.statusCode = 404;
+      throw error;
     }
   } catch (error) {
     console.log(error);
-    return res.status(error.statusCode).json({
-      response: error.message,
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
       succes: false,
     });
   }
 });
+
+const create = async (req, res) => {
+  try {
+    const data = req.body;
+    const one = await product.create(data);
+
+    return res.json({
+      statusCode: 201,
+      message: "CREATE ID: " + one.id,
+    });
+  } catch (error) {
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
+      succes: false,
+    });
+  }
+};
+
+const update = async (req, res) => {
+  try {
+    const { pid } = req.params;
+    const data = req.body;
+    const one = await product.update(pid, data);
+
+    return res.json({
+      statusCode: 200,
+      response: one,
+      succes: true,
+    });
+  } catch (error) {
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
+      succes: false,
+    });
+  }
+};
+
+const destroy = async (req, res) => {
+  try {
+    const { pid } = req.params;
+    const one = await product.destroy(pid);
+
+    return res.json({
+      statusCode: 200,
+      response: one,
+      succes: true,
+    });
+  } catch (error) {
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
+      succes: false,
+    });
+  }
+};
+
+server.put("/api/products/:pid", update);
+server.post("/api/products", create);
+server.delete("/api/products/:pid", destroy);
 
 // READ ONE USER
 server.get("/api/users/:uid", async (req, res) => {
@@ -116,19 +179,19 @@ server.get("/api/users/:uid", async (req, res) => {
         succes: true,
       });
     } else {
-      const error = new Error("Not Found")
-      error.statusCode= 404
-      throw error
+      const error = new Error("Not Found");
+      error.statusCode = 404;
+      throw error;
     }
   } catch (error) {
     console.log(error);
-    return res.status(error.statusCode).json({
-      response: error.message,
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
       succes: false,
     });
   }
 });
-
 
 // READ ALL USERS
 server.get("/api/users", async (req, res) => {
@@ -143,16 +206,16 @@ server.get("/api/users", async (req, res) => {
         succes: true,
       });
     } else {
-      const error = new Error("Not Found")
-      error.statusCode= 404
-      throw error
+      const error = new Error("Not Found");
+      error.statusCode = 404;
+      throw error;
     }
   } catch (error) {
     console.log(error);
-    return res.status(error.statusCode).json({
-      response: error.message,
+    return res.json({
+      statusCode: error.statusCode || 500,
+      response: error.message || "CODER API ERROR",
       succes: false,
     });
   }
 });
-

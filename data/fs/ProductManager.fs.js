@@ -26,8 +26,8 @@ class ProductManager {
         title: data.title,
         photo: "https://picsum.photos/",
         category: data.category,
-        price: data.price,
-        stock: data.stock,
+        price: data.price || 1,
+        stock: data.stock || 1,
       };
 
       let allProducts = await fs.promises.readFile(this.path, "utf-8");
@@ -76,6 +76,33 @@ class ProductManager {
     }
   }
 
+
+  async update(id,data){
+    try {
+      let all = await this.read()
+      let one = all.find(each => each.id === id)
+     //RECORRE EL OBJETO Y ACTUALIZA LAS PROPIEDADES 
+      if (one){
+        for (let prop in data){
+          one[prop] = data[prop]
+        }
+      
+        all = JSON.stringify(all,null,2)
+      await fs.promises.writeFile(this.path,all)
+      return one;
+      }
+      else{
+        const error = new Error("Not Found")
+        error.statusCode = 404
+        throw error
+      }
+      
+
+    } catch (error) {
+      throw error
+    }
+  }
+
   async destroy(id) {
     try {
       let allProducts = await fs.promises.readFile(this.path, "utf-8");
@@ -83,15 +110,17 @@ class ProductManager {
 
       let one = allProducts.find((each) => each.id === id);
       if (!one) {
-        throw new Error("Producto no encontrado");
+        const error = new Error("not found!");
+        error.statusCode = 404;
+        throw error;
       } else {
         let filtered = allProducts.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-        console.log("Producto eliminado");
+        return one
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 }
