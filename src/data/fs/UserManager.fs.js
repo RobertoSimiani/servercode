@@ -4,7 +4,7 @@ import path from "path";
 
 class UserManager {
   constructor() {
-    this.path = "./data/fs/files/user.json";
+    this.path = "./src/data/fs/files/user.json";
     this.init();
   }
 
@@ -21,30 +21,41 @@ class UserManager {
 
   async create(data) {
     try {
-      const user = {
-        id: crypto.randomBytes(12).toString("hex"),
-        photo: "https://picsum.photos/",
-        email: data.email,
-        password: data.password,
-        role: data.role || 0 ,
-      };
+      if(!data.email){
+        throw new Error("INGRESE EMAIL");
+      }
+      if(!data.password){
+        throw new Error("INGRESE PASSWORD");
+      }
+      else{
+        const user = {
+          id: crypto.randomBytes(12).toString("hex"),
+          photo: "https://picsum.photos/",
+          email: data.email,
+          password: data.password,
+          role: data.role || 0 ,
+        };
 
       let allUser = await fs.promises.readFile(this.path, "utf-8");
       allUser = JSON.parse(allUser);
       allUser.push(user);
       allUser = JSON.stringify(allUser, null, 2);
       await fs.promises.writeFile(this.path, allUser);
-      console.log({ created: user.id });
+      return user;
+      }
+      
+
+      
     } catch (error) {
-      throw new Error("No se pudo crear el usuario");
+      throw error;
     }
   }
 
-  async read(rol) {
+  async read(role) {
     try {
       let allUser = await fs.promises.readFile(this.path, "utf-8");
       allUser = JSON.parse(allUser);
-      rol && (allUser = allUser.filter(each => each.role === rol))
+      role && (allUser = allUser.filter(each => each.role === role))
 
       if (allUser.length === 0) {
         return null
@@ -92,24 +103,51 @@ class UserManager {
       console.log(error);
     }
   }
+
+  async update(id,data){
+    try {
+      let all = await this.read()
+      let one = all.find(each => each.id === id)
+     //RECORRE EL OBJETO Y ACTUALIZA LAS PROPIEDADES 
+      if (one){
+        for (let prop in data){
+          one[prop] = data[prop]
+        }
+      
+        all = JSON.stringify(all,null,2)
+      await fs.promises.writeFile(this.path,all)
+      return one;
+      }
+      else{
+        const error = new Error("Not Found")
+        error.statusCode = 404
+        throw error
+      }
+      
+
+    } catch (error) {
+      throw error
+    }
+  }
+
 }
 
 // async function test() {
-//   try {
+//    try {
 //     const user = new UserManager();
     
-//     await user.create({ email: "email1@gmail.com",  password: "pass1",  role: 5});
-//     await user.create({ email: "email2@gmail.com",  password: "pass1",  role: 5});
-//     await user.create({ email: "email3@gmail.com",  password: "pass1",  role: 5});
-//     await user.create({ email: "email4@gmail.com",  password: "pass1",  role: 5});
+//     await user.create({ email: "email1@gmail.com",  password: "pass1",  role: 0});
+//     await user.create({ email: "email2@gmail.com",  password: "pass1",  role: 0});
+//     await user.create({ email: "email3@gmail.com",  password: "pass1",  role: 1});
+//     await user.create({ email: "email4@gmail.com",  password: "pass1",  role: 1});
         
-//     await user.read();
+//      await user.read();
   
 //     } catch (error) {
-//     console.log(error);
-//   }
-// }
-// test();
+//      console.log(error);
+//    }
+//  }
+//   test();
 
 
 const user = new UserManager()
