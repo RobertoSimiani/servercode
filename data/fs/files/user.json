@@ -1,0 +1,30 @@
+[
+  {
+    "id": "782613ed2274e5443811a7b8",
+    "photo": "https://picsum.photos/",
+    "email": "email1@gmail.com",
+    "password": "pass1",
+    "role": 5
+  },
+  {
+    "id": "11180dddf7e6f2b491a3b422",
+    "photo": "https://picsum.photos/",
+    "email": "email2@gmail.com",
+    "password": "pass1",
+    "role": 1
+  },
+  {
+    "id": "8c92b6c199d5d1e3538f98ea",
+    "photo": "https://picsum.photos/",
+    "email": "email3@gmail.com",
+    "password": "pass1",
+    "role": 5
+  },
+  {
+    "id": "a10cf938ffc9bd211143b10c",
+    "photo": "https://picsum.photos/",
+    "email": "email4@gmail.com",
+    "password": "pass1",
+    "role": 5
+  }
+]
