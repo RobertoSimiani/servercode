@@ -2,7 +2,7 @@
   {
     "id": "40fe27e49570ae6626402a3a",
     "title": "Remera Estampada",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=1",
     "category": "ropa masculina",
     "price": 8500,
     "stock": 20
@@ -10,7 +10,7 @@
   {
     "id": "d63287b79043ac31ccd6a4a4",
     "title": "Pantalón de Jean",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=2",
     "category": "ropa masculina",
     "price": 12500,
     "stock": 15
@@ -18,7 +18,7 @@
   {
     "id": "babd3dc9422c450145721411",
     "title": "Camisa de Cuadros",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=3",
     "category": "ropa masculina",
     "price": 9500,
     "stock": 18
@@ -26,7 +26,7 @@
   {
     "id": "bb7576e8d8fd037df09dad35",
     "title": "Zapatillas Deportivas",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=4",
     "category": "calzado",
     "price": 15500,
     "stock": 25
@@ -34,7 +34,7 @@
   {
     "id": "e84d356eddea331a98369aca",
     "title": "Vestido Floral",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=5",
     "category": "ropa femenina",
     "price": 13500,
     "stock": 12
@@ -42,7 +42,7 @@
   {
     "id": "a9c4b6477f8fbdeb12f83668",
     "title": "Falda Plisada",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=6",
     "category": "ropa femenina",
     "price": 10500,
     "stock": 20
@@ -50,7 +50,7 @@
   {
     "id": "f7a2dbeb0fb4a6e1d7756ccf",
     "title": "Campera de Cuero",
-    "photo": "https://picsum.photos/",
+    "photo": "https://source.unsplash.com/random/200x200?sig=7",
     "category": "ropa unisex",
     "price": 28000,
     "stock": 10

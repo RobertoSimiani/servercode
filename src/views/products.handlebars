@@ -1,0 +1,44 @@
+
+<section class="d-flex">
+    <article  class="d-flex flex-column align-items-center w-50">
+        <h1 class="text-center">Register Product</h1>
+        <form class="d-flex flex-column w-50">
+            <input class="m-2" type="text" name="title" placeholder="title" id="title" >
+            <input class="m-2" type="text" name="photo" placeholder="photo" id="photo">
+            <input class="m-2" type="text" name="category" placeholder="category" id="category">
+            <input class="m-2" type="text" name="price" placeholder="price" id="price">
+            <input class="m-2" type="text" name="stock" placeholder="stock" id="stock">
+            <input class="m-2" type="button" id="register" value="Register" >
+            
+        </form>
+    </article>
+    <article id="products" class="d-flex flex-wrap w-50"></article>
+</section>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  const socket = io();
+  socket.on("products", data =>{
+    
+    let template = ``
+    template = data.map(each => `
+    <div class="card m-2" style="width: 18rem;">
+            <img style="height : 10rem"  src="${each.photo}" class="card-img-top" alt="...">
+         <div class="card-body">
+            <h5 class="card-title">${each.title}</h5>
+        </div>
+    </div>`).join("")
+    document.querySelector("#products").innerHTML = template
+  })
+
+  document.querySelector("#register").addEventListener("click",(event)=>{
+    const title = document.querySelector("#title").value
+    const photo = document.querySelector("#photo").value
+    const category = document.querySelector("#category").value
+    const price = document.querySelector("#price").value
+    const stock = document.querySelector("#stock").value
+
+    socket.emit("newProduct",{title,photo,category,price,stock})
+  })
+
+</script>
