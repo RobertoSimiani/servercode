@@ -1,0 +1,10 @@
+<h1 class="bg-body-secondary p-1 ">Tienda Roberto</h1>
+
+{{#each products}}
+    <p class="ms-2"> - {{this.title}}</p>
+{{/each}}
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  const socket = io();
+</script>

@@ -27,7 +27,7 @@ class ProductManager {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
-          photo: "https://picsum.photos/",
+          photo: data.photo || "https://picsum.photos/",
           category: data.category || "ropa",
           price: data.price || 1,
           stock: data.stock || 1,
