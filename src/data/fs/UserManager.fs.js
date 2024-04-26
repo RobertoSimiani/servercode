@@ -2,7 +2,7 @@ import fs from "fs";
 import crypto from "crypto";
 import path from "path";
 
-class UserManager {
+class UsersManager {
   constructor() {
     this.path = "./src/data/fs/files/user.json";
     this.init();
@@ -150,5 +150,5 @@ class UserManager {
 //   test();
 
 
-const user = new UserManager()
-export default user
+const usersManager = new UsersManager()
+export default usersManager

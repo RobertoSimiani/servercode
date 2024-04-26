@@ -326,5 +326,13 @@
     "category": "calzado",
     "price": 12500,
     "stock": 18
+  },
+  {
+    "id": "aac1392394fd768f1b11d0bd",
+    "title": "Ropa",
+    "photo": "https://picsum.photos/",
+    "category": "20",
+    "price": "20",
+    "stock": "20"
   }
 ]
