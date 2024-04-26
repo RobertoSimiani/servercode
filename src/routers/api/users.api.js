@@ -1,5 +1,6 @@
 import { Router } from "express";
-import user from "../../data/fs/UserManager.fs.js";
+//import usersManager from "../../data/fs/UserManager.fs.js";
+import usersManager from "../../data/mongo/UsersManager.mongo.js";
 
 const usersRouter = Router();
 
@@ -13,7 +14,7 @@ usersRouter.delete("/:uid", destroy);
 async function read(req, res, next) {
     try {
       const { role } = req.query;
-      const all = await user.read(role);
+      const all = await usersManager.read(role);
   
       if (all) {
         return res.status(200).json({
@@ -32,7 +33,7 @@ async function read(req, res, next) {
   async function readOne(req, res, next) {
     try {
       const { uid } = req.params;
-      const one = await user.readOne(uid);
+      const one = await usersManager.readOne(uid);
   
       if (one) {
         return res.json({
@@ -52,7 +53,7 @@ async function read(req, res, next) {
   async function create(req, res,next) {
     try {
       const data = req.body;
-      const one = await user.create(data);
+      const one = await usersManager.create(data);
   
       return res.json({
         statusCode: 201,
@@ -68,7 +69,7 @@ async function read(req, res, next) {
     try {
       const { uid } = req.params;
       const data = req.body;
-      const one = await user.update(uid, data);
+      const one = await usersManager.update(uid, data);
   
       return res.json({
         statusCode: 200,
@@ -82,7 +83,7 @@ async function read(req, res, next) {
   async function destroy(req, res, next) {
     try {
       const { uid } = req.params;
-      const one = await user.destroy(uid);
+      const one = await usersManager.destroy(uid);
   
       return res.json({
         statusCode: 200,
