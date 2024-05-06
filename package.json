@@ -16,10 +16,7 @@
     "express": "^4.19.0",
     "express-handlebars": "^7.1.2",
     "mongoose": "^8.3.2",
-<<<<<<< HEAD
     "mongoose-paginate-v2": "^1.8.0",
-=======
->>>>>>> 80a42823833372115e91b6cdfab4f88f05da0fd1
     "morgan": "^1.10.0",
     "socket.io": "^4.7.5"
   },
