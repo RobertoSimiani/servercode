@@ -4,6 +4,8 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 
 import product from "./src/data/fs/ProductManager.fs.js";
 import user from "./src/data/fs/UserManager.fs.js";
@@ -41,6 +43,16 @@ server.set('views', __dirname+'/src/views')
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(morgan("dev"));
+server.use(express.static("public"))
+server.use(cookieParser(process.env.SECRET));
+server.use(
+  session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 },
+  })
+);
 
 
 //---------------------------------------------------------------------------------------------
