@@ -48,6 +48,16 @@ class Manager {
         throw error;
       }
     }
+
+    async readByEmail(email) {
+      try {
+        const one = await this.Model.findOne({email});
+        //const one = await this.Model.findOne({_id : id});
+        return one;
+      } catch (error) {
+        throw error;
+      }
+    }
   
     async update(id,data){
       try {
