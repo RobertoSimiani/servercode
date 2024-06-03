@@ -1,53 +1,23 @@
-import { Router } from "express";
+import CustomRouter from "../CustomRouter.js";
 import cartsManager from "../../data/mongo/CartsManager.mongo.js";
 
-const cartsRouter = Router();
 
-cartsRouter.get("/", read);
-cartsRouter.get("/paginate", paginate);
-cartsRouter.get("/:cid", readOne);
-cartsRouter.post("/", create);
-cartsRouter.put("/:cid", update);
-cartsRouter.delete("/:cid", destroy);
+class CartsRouter extends CustomRouter{
+  init(){
+    this.read("/", read);
+    this.read("/paginate", paginate);
+    this.read("/:cid", readOne);
+    this.create("/", create);
+    this.update("/:cid", update);
+    this.destroy("/:cid", destroy);
+  }
+}
 
 
 
 
-// cartsRouter.post("/", async (req, res, next) => {
-//   try {
-//     const data = req.body;
-//     const one = await cartsManager.create(data);
-//     return res.json({
-//       statusCode: 201,
-//       message: "CREATED",
-//       response: one,
-//     });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
+const cartsRouter = new CartsRouter();
 
-// cartsRouter.get("/", async (req, res, next) => {
-//   try {
-//     const { user_id } = req.query;
-//     if (user_id) {
-//       const all = await cartsManager.read({ user_id });
-//       if (all.length > 0) {
-//         return res.json({
-//           statusCode: 200,
-//           message: "READ",
-//           response: all,
-//         });
-//       }
-//     } 
-//       const error = new Error("NOT FOUND");
-//       error.statusCode = 404;
-//       throw error;
-    
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
 
 async function read(req, res, next) {
   try {
@@ -163,4 +133,4 @@ async function destroy(req, res, next) {
 }
 
 
-export default cartsRouter;
+export default cartsRouter.getRouter();

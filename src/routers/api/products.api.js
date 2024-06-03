@@ -1,14 +1,19 @@
-import { Router, query } from "express";
 import productsManager from "../../data/mongo/ProductsManager.mongo.js";
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
+import CustomRouter from "../CustomRouter.js";
 
-const productsRouter = Router();
+class ProductsRouter extends CustomRouter {
+  init() {
+    this.read("/",["PUBLIC"], read);
+    this.read("/paginate",["PUBLIC"], paginate);
+    this.read("/:pid",["PUBLIC"], readOne);
+    this.create("/",["ADMIN"], isValidAdmin, create);
+    this.update("/:pid",["ADMIN"], update);
+    this.destroy("/:pid",["ADMIN"], destroy);
+  }
+}
 
-productsRouter.get("/", read);
-productsRouter.get("/paginate", paginate);
-productsRouter.get("/:pid", readOne);
-productsRouter.post("/", create);
-productsRouter.put("/:pid", update);
-productsRouter.delete("/:pid", destroy);
+const productsRouter = new ProductsRouter();
 
 async function read(req, res, next) {
   try {
@@ -16,10 +21,7 @@ async function read(req, res, next) {
     const all = await productsManager.read(category);
 
     if (all) {
-      return res.json({
-        statusCode: 200,
-        response: all,
-      });
+            return res.response200(all)
     } else {
       const error = new Error("Not Found");
       error.statusCode = 404;
@@ -36,10 +38,7 @@ async function readOne(req, res, next) {
     const one = await productsManager.readOne(pid);
 
     if (one) {
-      return res.json({
-        statusCode: 200,
-        response: one,
-      });
+      return res.response200(one)
     } else {
       const error = new Error("Not Found");
       error.statusCode = 404;
@@ -55,10 +54,10 @@ async function paginate(req, res, next) {
     const filter = {};
     const opts = {};
 
-    if(req.query.limit){
+    if (req.query.limit) {
       opts.limit = req.query.limit;
     }
-    if(req.query.page){
+    if (req.query.page) {
       opts.page = req.query.page;
     }
 
@@ -67,13 +66,13 @@ async function paginate(req, res, next) {
     return res.json({
       statusCode: 200,
       response: all.docs,
-      info:{
+      info: {
         page: all.page,
         limit: all.limit,
         prevPage: all.prevPage,
         nextPage: all.nextPage,
-        totalPages: all.totalPages
-      }
+        totalPages: all.totalPages,
+      },
     });
   } catch (error) {
     return next(error);
@@ -100,10 +99,8 @@ async function update(req, res, next) {
     const data = req.body;
     const one = await productsManager.update(pid, data);
 
-    return res.json({
-      statusCode: 200,
-      response: one,
-    });
+    return res.response200(one)
+
   } catch (error) {
     return next(error);
   }
@@ -123,4 +120,4 @@ async function destroy(req, res, next) {
   }
 }
 
-export default productsRouter;
+export default productsRouter.getRouter();
