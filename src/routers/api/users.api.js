@@ -1,15 +1,19 @@
-import { Router } from "express";
-//import usersManager from "../../data/fs/UserManager.fs.js";
+import CustomRouter from "../CustomRouter.js";
 import usersManager from "../../data/mongo/UsersManager.mongo.js";
 
-const usersRouter = Router();
+class UsersRouter extends CustomRouter{
+  init(){
+    this.read("/", read);
+    this.read("/:uid", readOne);
+    this.create("/", create);
+    this.update("/:uid", update);
+    this.destroy("/:uid", destroy);
+  }
+}
 
-usersRouter.get("/", read);
-usersRouter.get("/:uid", readOne);
-usersRouter.post("/", create);
-usersRouter.put("/:uid", update);
-usersRouter.delete("/:uid", destroy);
 
+
+const usersRouter = new UsersRouter();
 
 async function read(req, res, next) {
     try {
@@ -96,4 +100,4 @@ async function read(req, res, next) {
   }
 
 
-export default usersRouter;
+export default usersRouter.getRouter();

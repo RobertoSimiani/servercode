@@ -42,7 +42,8 @@ function printFooter(opts, id) {
 
 async function printIcons() {
   let template = "";
-  let online = await fetch("api/sessions/online");
+  const opts = {headers:{token: localStorage.getItem("token")}}
+  let online = await fetch("api/sessions/online",opts);
   online = await online.json();
   if (online.statusCode === 200) {
     template = `
