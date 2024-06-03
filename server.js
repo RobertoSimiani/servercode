@@ -6,7 +6,10 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+<<<<<<< HEAD
 import MongoStore from "connect-mongo";
+=======
+>>>>>>> 4ff8cccf5cca496878aee160e2b6fef45978a786
 
 import product from "./src/data/fs/ProductManager.fs.js";
 import user from "./src/data/fs/UserManager.fs.js";
@@ -40,17 +43,28 @@ server.set("views", __dirname + "/src/views");
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(morgan("dev"));
+<<<<<<< HEAD
 server.use(express.static("public"));
 server.use(cookieParser(process.env.SECRET));
 server.use(
   session({
     store: new MongoStore({ mongoUrl: process.env.MONGO_URI, ttl: 60 * 60 }),
+=======
+server.use(express.static("public"))
+server.use(cookieParser(process.env.SECRET));
+server.use(
+  session({
+>>>>>>> 4ff8cccf5cca496878aee160e2b6fef45978a786
     secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4ff8cccf5cca496878aee160e2b6fef45978a786
 
 //---------------------------------------------------------------------------------------------
 
