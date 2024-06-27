@@ -6,15 +6,20 @@
   "type": "module",
   "scripts": {
     "start": "node ./server.js",
-    "dev": "nodemon ./server.js"
+    "dev": "nodemon ./server.js --env=dev -p 8080",
+    "argv": "nodemon ./server.js -p 8080 --env=prod",
+    "memory": "nodemon ./server.js -p 8081 --env=prod --persistence memory",
+    "fs": "nodemon ./server.js -p 8080 --env=prod --persistence fs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "commander": "^12.1.0",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.0",
     "express-handlebars": "^7.1.2",
