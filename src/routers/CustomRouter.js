@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
 import usersManager from "../data/mongo/UsersManager.mongo.js";
+<<<<<<< HEAD
 import passport from "../middlewares/passport.mid.js";
+=======
+>>>>>>> 75adfb4f9f4ca3e375a061b43995b5678a4dace0
 
 class CustomRouter {
   constructor() {
