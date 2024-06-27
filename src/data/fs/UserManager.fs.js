@@ -28,20 +28,14 @@ class UsersManager {
         throw new Error("INGRESE PASSWORD");
       }
       else{
-        const user = {
-          id: crypto.randomBytes(12).toString("hex"),
-          photo: "https://picsum.photos/",
-          email: data.email,
-          password: data.password,
-          role: data.role || 0 ,
-        };
+        
 
       let allUser = await fs.promises.readFile(this.path, "utf-8");
       allUser = JSON.parse(allUser);
-      allUser.push(user);
+      allUser.push(data);
       allUser = JSON.stringify(allUser, null, 2);
       await fs.promises.writeFile(this.path, allUser);
-      return user;
+      return data;
       }
       
 

@@ -1,4 +1,5 @@
-import passport from "passport";
+
+import passport from "../middlewares/passport.mid.js"
 
 function passportCb(strategy) {
   return (req, res, next) => {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
 import usersManager from "../data/mongo/UsersManager.mongo.js";
+import passport from "../middlewares/passport.mid.js";
 
 class CustomRouter {
   constructor() {
@@ -32,6 +33,8 @@ class CustomRouter {
   };
 
   policies = (policies) => async (req, res, next) => {
+    console.log(typeof policies); // Imprime el tipo de policies
+    console.log(policies);
     if (policies.includes("PUBLIC")) return next();
     else {
       let token = req.cookies["token"];
